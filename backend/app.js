@@ -2,9 +2,10 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
-app.options('*', cors()); // Permitir solicitações OPTIONS de qualquer origem
+// Configuração de CORS para permitir solicitações OPTIONS de qualquer origem
+app.options('*', cors());
 
-// Configurar cabeçalhos CORS para permitir solicitações da origem localhost:3000
+// Configuração de CORS para permitir solicitações da origem localhost:3000
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -16,7 +17,6 @@ app.use((req, res, next) => {
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 
-app.use(cors()); // Habilita o CORS para todas as rotas
 app.use(express.json()); // Middleware para processar o corpo das requisições
 
 // Configuração das rotas
