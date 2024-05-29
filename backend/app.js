@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
+app.options('*', cors()); // Responder a todas as solicitações OPTIONS com os cabeçalhos CORS
+
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 
