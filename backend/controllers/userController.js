@@ -1,46 +1,49 @@
-exports.getUser = (req, res) => {
-  // Obter o ID do parâmetro da URL
-  const userId = req.params.id;
+const User = require('../classes/userClass');
+const {insertUser, selectOneUserModel} = require('../models/userModel');
 
-  // Definir os dados do usuário baseado no ID
-  let user = {};
-  if (userId === '4') {
-    user = {
-      id: userId,
-      username: 'john',
-      email: 'john@example.com'
-    };
-  } else if (userId === '5') {
-    user = {
-      id: userId,
-      username: 'maria',
-      email: 'maria@example.com'
-    };
-  } else {
-    user = {
-      id: userId,
-      username: 'unknown',
-      email: 'unknown@example.com'
-    };
-  }
+module.exports = class CadastrosUsuarios{
+    static async postUser(req, res){
+        try{
+         const { nm_usuario, email, senha, telefone} = req.body;
 
-  // Enviar os dados do usuário como resposta
-  res.json({ user });
-};
+         const user = User();
 
-// exports.loginUser = (req, res) => {
-//   const { username, password } = req.body;
+         user.nmUsuario = nm_usuario;
+         user.email = email;
+         user.senha = senha;
+         user.telefone = telefone;
+         
+         if(!user.nmUsuario) return res.status(401).json({error: true, message:"Dados inválidos"});
 
-//   // Usuário e senha de teste
-//   const testUser = {
-//     username: 'teste',
-//     password: 'senha'
-//   };
+         const result = await insertUser(user.convertToMapUser());
 
-//   // Verificar se as credenciais estão corretas
-//   if (username === testUser.username && password === testUser.password) {
-//     res.status(200).json({ message: 'Login bem-sucedido' });
-//   } else {
-//     res.status(401).json({ message: 'Credenciais inválidas' });
-//   }
-// };
+         if (result === 0) return res.sendStatus(204);
+
+         return res.status(201).json({error: false, message:"Usário criado com sucesso"});
+        }catch(err){
+            res.sendStatus(501)
+        }
+    }
+    static async getUserById(req, res){
+        try {
+          const id_user = req.params.idUser
+
+          const user = new User();
+          
+          user.idUser = id_user;
+
+          if(!user.idUser) return res.status(401).json({error:true, message:"Dados incorretos"});
+
+          const result = await selectOneUserModel(user.convertToMapUser());
+
+          if(result.length === 0 ) return res.sendStatus(204);
+
+          return res.status(200).json({error:false, message: "Busca de dados com sucesso", data:result});
+
+        } catch(err){
+            res.sendStatus(501)
+        }
+    }
+}
+
+    

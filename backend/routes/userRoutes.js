@@ -1,11 +1,12 @@
-// routes/userRoutes.js
+// userRoutes.js
+const CadastrosUsuarios = require('../controllers/userController');
+const {Router} = require('express');	
+const router = Router();
 
-const express = require('express');
-const router = express.Router();
+// Rota para obter um usuário pelo ID
+router.get('/:id', CadastrosUsuarios.getUserById);
 
-// Exemplo de uma rota de usuário
-router.get('/', (req, res) => {
-    res.send('Lista de usuários');
-});
+// Rota para registrar um usuário
+router.post('/postUser', CadastrosUsuarios.postUser);
 
 module.exports = router;
