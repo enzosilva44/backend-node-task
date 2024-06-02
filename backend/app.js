@@ -3,23 +3,23 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./db/database');
 const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 require('dotenv').config();
 
 const app = express();
 
-app.use('/users', userRoutes);
-
-// Configuração de CORS para permitir solicitações OPTIONS de qualquer origem
-app.options('*', cors());
-
 // Configuração de CORS para permitir solicitações da origem localhost:3000
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+
+// Configuração para permitir solicitações OPTIONS de qualquer origem
+app.options('*', cors(corsOptions));
 
 app.use(express.json()); // Middleware para processar o corpo das requisições
 
@@ -30,14 +30,11 @@ app.get('/test-db', async (req, res) => {
     res.send('Database is connected');
   } catch (err) {
     console.error(err);
-    res.status(200).send('Database is not connected');
+    res.status(500).send('Database is not connected');
   }
 });
 
 // Importação e uso das rotas de usuário e autenticação
-const userRoutes = require('./routes/userRoutes');
-const authRoutes = require('./routes/authRoutes');
-
 app.use('/api/users', userRoutes); // Use as rotas de usuário definidas em userRoutes
 app.use('/api/auth', authRoutes); // Use as rotas de autenticação definidas em authRoutes
 
