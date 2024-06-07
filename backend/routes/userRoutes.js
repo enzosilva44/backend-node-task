@@ -13,15 +13,12 @@
 //
 //module.exports = router;
 
-
 const express = require('express');
 const router = express.Router();
-const userController = require('../controllers/userController');
 const userModel = require('../models/userModel');
+const userController = require ('../controllers/userController');
 
-// Rota para login
-// Rota para login
-router.post('/register', userModel.insertUser);
+router.post('/register', userController.postUser);
 
 router.get('/register', (req, res) => {
     res.send('Hello World! register');
