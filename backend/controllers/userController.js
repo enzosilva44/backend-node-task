@@ -4,9 +4,9 @@ const { insertUser, selectOneUserModel } = require("../models/userModel");
 module.exports = class CadastrosUsuarios {
   static async postUser(req, res) {
     try {
-      const { nm_usuario, email, senha, telefone } = req.body;
+      const { nm_usuario, email, senha, } = req.body;
 
-      if (!nm_usuario || !email || !senha || !telefone) {
+      if (!nm_usuario || !email || !senha) {
         return res.status(400).json({ error: true, message: "Dados incompletos" });
       }
 
@@ -14,7 +14,6 @@ module.exports = class CadastrosUsuarios {
       user.nmUsuario = nm_usuario;
       user.email = email;
       user.senha = senha;
-      user.telefone = telefone;
 
       const result = await insertUser(user.convertToMapUser());
 

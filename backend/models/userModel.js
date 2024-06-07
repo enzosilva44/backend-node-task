@@ -5,14 +5,15 @@ db.connect();
 
 async function insertUser(userData) {
   const query = `
-    INSERT INTO users (nm_usuario, email, senha, telefone)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO tb_usuarios (nm_usuario, email, senha)
+    VALUES (?, ?, ?)
   `;
 
-  const values = [userData.nmUsuario, userData.email, userData.senha, userData.telefone];
+  const values = [userData.nmUsuario, userData.email, userData.senha ];
 
   try {
     const [result] = await db.execute(query, values);
+    console.log("Usário inserido com sucesso model:");
     return result;
   } catch (err) {
     console.error("Erro ao inserir usuário:", err);

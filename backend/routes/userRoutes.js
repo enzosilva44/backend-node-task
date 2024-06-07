@@ -17,13 +17,14 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const userModel = require('../models/userModel');
 
 // Rota para login
 // Rota para login
-router.post('/register', userController.postUser);
+router.post('/register', userModel.insertUser);
 
 router.get('/register', (req, res) => {
-    res.send('Hello World!');
+    res.send('Hello World! register');
 });
 
 //teste
