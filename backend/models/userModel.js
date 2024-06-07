@@ -1,7 +1,7 @@
 const db = require('../db/database'); 
 db.connect();
 
-const db = require("../db"); // Supondo que você tenha um módulo db para conectar ao banco de dados
+//const db = require("../db"); // Supondo que você tenha um módulo db para conectar ao banco de dados
 
 async function insertUser(userData) {
   const query = `
