@@ -1,19 +1,24 @@
 const db = require('../db/database'); 
 db.connect();
 
-async function insertUser(tutor, idEndereco){   
-    const client = await db.connect();
-    const sql = "INSERT INTO tb_usuarios () VALUES () RETURNING id_user;";
-    const values = [];
-    try{
-        const res = await client.query(sql, values);
-        client.release();
-        return res.rows[0].id_tutor;
-    }catch(err){
-        return 0;
-    }
-}
+const db = require("../db"); // Supondo que você tenha um módulo db para conectar ao banco de dados
 
+async function insertUser(userData) {
+  const query = `
+    INSERT INTO users (nm_usuario, email, senha, telefone)
+    VALUES (?, ?, ?, ?)
+  `;
+
+  const values = [userData.nmUsuario, userData.email, userData.senha, userData.telefone];
+
+  try {
+    const [result] = await db.execute(query, values);
+    return result;
+  } catch (err) {
+    console.error("Erro ao inserir usuário:", err);
+    throw err;
+  }
+}
 async function selectOneUserModel(dataAccountUser){
     const client = await db.connect();
     const sql = "SELECT * FROM tb_usuarios WHERE id_user = $1;";

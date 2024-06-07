@@ -3,14 +3,12 @@ module.exports = class User{
     #nmUsuario;
     #email;
     #senha;
-    #telefone;
 
     constructor(){
         this.#idUsuario = null;
         this.#nmUsuario = null;
         this.#email = null;
         this.#senha = null;
-        this.#telefone = null;
     }
 
     set idUsuario(idUsuario){
@@ -43,20 +41,10 @@ module.exports = class User{
         return this.#senha;
     }
 
-    set telefone(telefone){
-        telefone = Number(telefone);
-        if(typeof(telefone) == 'number' || isNaN(telefone)) return false;
-        this.#telefone = telefone;
-    }
-    get telefone(){
-        return this.#telefone;
-    }
-
     convertToMapUser(){
         id_usuario = this.#idUsuario;
         nm_usuario = this.#nmUsuario;
         email = this.#email;
         senha = this.#senha;
-        telefone = this.#telefone;
     }
 }
