@@ -27,5 +27,4 @@ router.get('/register', (req, res) => {
 });
 
 //teste
-sgrf
 module.exports = router;
