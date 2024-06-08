@@ -1,9 +1,9 @@
-const { insertUser, selectOneUserModel } = require("../models/userModel");
+const { insertUser } = require("../models/userModel");
 
 exports.postUser = async (req, res) => {
     try {
-      const { nm_usuario, email, senha, } = req.body;
-
+      const { nm_usuario, email, senha } = req.body;
+      console.log(req.body);
       const user = new User();
       user.nmUsuario = nm_usuario;
       user.email = email;

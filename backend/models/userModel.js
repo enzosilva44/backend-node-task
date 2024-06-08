@@ -20,6 +20,8 @@ async function insertUser(userData) {
     throw err;
   }
 }
+
+
 async function selectOneUserModel(dataAccountUser){
     const client = await db.connect();
     const sql = "SELECT * FROM tb_usuarios WHERE id_user = $1;";
