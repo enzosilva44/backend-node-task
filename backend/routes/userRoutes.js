@@ -15,10 +15,9 @@
 
 const express = require('express');
 const router = express.Router();
-const userModel = require('../models/userModel');
-const userController = require ('../controllers/userController');
+const postUser = require ('../controllers/userController');
 
-router.post('/register', userController.postUser);
+router.post('/register', postUser);
 
 router.get('/register', (req, res) => {
     res.send('Hello World! register');
