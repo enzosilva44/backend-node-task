@@ -10,7 +10,7 @@ exports.postUser = async (req, res) => {
       user.senha = senha;
 
       const result = await insertUser(user.convertToMapUser());
-
+      console.log(result, "teste result");
       if (result.affectedRows > 0) {
         return res.status(201).json({
           error: false,
