@@ -41,10 +41,11 @@ module.exports = class User{
         return this.#senha;
     }
 
-    convertToMapUser(){
-        id_usuario = this.#idUsuario;
-        nm_usuario = this.#nmUsuario;
-        email = this.#email;
-        senha = this.#senha;
+    convertToMapUser() { return {
+        id_usuario: this.#idUsuario,
+        nm_usuario: this.#nmUsuario,
+        email: this.#email,
+        senha: this.#senha
+        } 
     }
 }
