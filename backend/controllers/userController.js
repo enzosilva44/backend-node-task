@@ -18,8 +18,7 @@ module.exports = class userController {
       return res.status(201).json({ error: false, message: "Usário inserido com sucesso" });
 
     } catch (err) {
-      console.log("mensagem erro do controller", error, message);
-      return res.status(500).json({ error: true, message: "Erro no servidor" });
+        return res.status(500).json({ error: true, message: "Erro no servidor" });
     }
   };
 };
