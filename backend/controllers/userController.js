@@ -20,7 +20,7 @@ module.exports = class userController {
       
       console.log("teste 6");
 
-      const result = await insertUser(user.convertToMapUser());
+      const result = await insertUser(user);
       console.log("teste 7");
 
       console.log(result, "teste result");

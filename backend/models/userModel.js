@@ -3,6 +3,8 @@ const pool = require('../db/database');
 
 async function insertUser(userData) {
   try {
+    console.log(userData);
+    
     const sql = "INSERT INTO tb_usuarios (nm_usuario, email, senha) VALUES ($1, $2, $3) RETURNING *";
     const values = [userData.nmUsuario, userData.email, userData.senha];
     const result = await pool.query(sql, values);
