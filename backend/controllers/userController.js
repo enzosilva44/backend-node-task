@@ -1,4 +1,5 @@
 const { insertUser } = require("../models/userModel");
+const User = require("../classes/userClass");
 
 module.exports = class userController {
   static async postUser (req, res) {
@@ -6,6 +7,7 @@ module.exports = class userController {
     try {
       const { nm_usuario, email, senha } = req.body;
       console.log(req.body);
+
       const user = new User();
       user.nmUsuario = nm_usuario;
       user.email = email;
