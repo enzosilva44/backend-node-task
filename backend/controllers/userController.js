@@ -13,7 +13,12 @@ module.exports = class userController {
       user.email = email;
       user.senha = senha;
 
+      console.log(user.convertToMapUser());
+
+      if(!user.nmUsuario || !user.email || !user.senha) return res.status(401).json({ error: true, message: "Preencha todos os campos" });
+
       const result = await insertUser(user.convertToMapUser());
+      
       console.log(result, "teste result");
       return res.status(201).json({ error: false, message: "Usário inserido com sucesso" });
 
