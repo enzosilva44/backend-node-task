@@ -17,7 +17,7 @@ module.exports = class userController {
       user.senha = senha;
       console.log( "teste 4" );
 
-      console.log(user.convertToMapUser());
+      //console.log(user.convertToMapUser());
       console.log( "teste 5" );
 
       if(!user.nmUsuario || !user.email || !user.senha) return res.status(401).json({ error: true, message: "Preencha todos os campos" });
