@@ -13,18 +13,10 @@ module.exports = class userController {
 
       const result = await insertUser(user.convertToMapUser());
       console.log(result, "teste result");
-      if (result.affectedRows > 0) {
-        return res.status(201).json({
-          error: false,
-          message: "Usuário cadastrado com sucesso",
-          data: result.insertId,
-        });
-      } else {
-        return res
-          .status(500)
-          .json({ error: true, message: "Erro ao inserir usuário" });
-      }
+      return res.status(201).json({ error: false, message: "Usário inserido com sucesso" });
+
     } catch (err) {
+      console.log("mensagem erro do controller", error, message);
       return res.status(500).json({ error: true, message: "Erro no servidor" });
     }
   };
