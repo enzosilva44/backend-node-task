@@ -12,12 +12,11 @@
 //
 //
 //module.exports = router;
-
 const express = require('express');
 const router = express.Router();
-const postUser = require ('../controllers/userController');
+const userController = require ('../controllers/userController');
 
-router.post('/register', postUser);
+router.post('/register', userController.postUser);
 
 router.get('/register', (req, res) => {
     res.send('Hello World! register');

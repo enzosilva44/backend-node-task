@@ -1,6 +1,8 @@
 const { insertUser } = require("../models/userModel");
 
-exports.postUser = async (req, res) => {
+module.exports = class userController {
+  static async postUser (req, res) {
+
     try {
       const { nm_usuario, email, senha } = req.body;
       console.log(req.body);
@@ -15,13 +17,15 @@ exports.postUser = async (req, res) => {
         return res.status(201).json({
           error: false,
           message: "Usuário cadastrado com sucesso",
-          data: result.insertId
+          data: result.insertId,
         });
       } else {
-        return res.status(500).json({ error: true, message: "Erro ao inserir usuário" });
+        return res
+          .status(500)
+          .json({ error: true, message: "Erro ao inserir usuário" });
       }
     } catch (err) {
       return res.status(500).json({ error: true, message: "Erro no servidor" });
     }
-  }
-
+  };
+};
