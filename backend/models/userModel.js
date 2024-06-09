@@ -4,23 +4,18 @@ db.connect();
 //const db = require("../db"); // Supondo que você tenha um módulo db para conectar ao banco de dados
 
 async function insertUser(userData) {
-  const query = `
-    INSERT INTO tb_usuarios (nm_usuario, email, senha)
-    VALUES (?, ?, ?)
-  `;
-
-  const values = [userData.nmUsuario, userData.email, userData.senha ];
+  const values = [userData.nmUsuario, userData.email, userData.senha];
 
   try {
-    const [result] = await db.execute(query, values);
-    console.log("Usário inserido com sucesso model:");
-    return result;
+    const sql = "INSERT INTO tb_usuarios (nm_usuario, email, senha) VALUES ($1, $2, $3) RETURNING *";
+    const result = await pool.query(sql, values);
+    console.log("Usuário inserido com sucesso model:", result.rows[0]);
+    return result.rows[0];
   } catch (err) {
     console.error("Erro ao inserir usuário:", err);
     throw err;
   }
 }
-
 
 async function selectOneUserModel(dataAccountUser){
     const client = await db.connect();
