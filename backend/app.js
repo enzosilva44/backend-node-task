@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const db = require('./db/database');
 const userRoutes = require('./routes/userRoutes');
+const taskRoutes = require('./routes/taskRoutes');
 const authRoutes = require('./routes/authRoutes');
 require('dotenv').config();
 
@@ -36,6 +37,7 @@ app.get('/test-db', async (req, res) => {
 
 // Importação e uso das rotas de usuário e autenticação
 app.use('/api/users', userRoutes); // Use as rotas de usuário definidas em userRoutes
+app.use('/api/task', taskRoutes); // Use as rotas de usuário definidas em userRoutes
 app.use('/api/auth', authRoutes); // Use as rotas de autenticação definidas em authRoutes
 
 // Definição da rota principal
