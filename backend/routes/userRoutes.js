@@ -18,9 +18,7 @@ const userController = require ('../controllers/userController');
 
 router.post('/register', userController.postUser);
 
-router.get('/register', (req, res) => {
-    res.send('Hello World! register');
-});
+router.get('/register', userController.getAllUsers);
 
 //teste
 module.exports = router;

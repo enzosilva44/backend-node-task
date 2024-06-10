@@ -8,23 +8,26 @@ module.exports = class userController {
       console.log(req.body);
 
       const user = new User();
-      console.log("teste 1");
       user.nmUsuario = nm_usuario;
-      console.log("teste 2");
       user.email = email;
-      console.log("teste 3");
       user.senha = senha;
-      console.log("teste 4");
 
       if (!user.nmUsuario || !user.email || !user.senha) return res.status(401).json({ error: true, message: "Preencha todos os campos" });
-      
-      console.log("teste 6");
 
       const result = await insertUser(user);
-      console.log("teste 7");
 
       console.log(result, "teste result");
       return res.status(201).json({ error: false, message: "Usuário inserido com sucesso" });
+    } catch (err) {
+      console.error('Error occurred:', err);
+      return res.status(500).json({ error: true, message: "Erro no servidor" });
+    }
+  }
+
+  static async getAllUsers (req, res) {
+    try {
+      const users = await selectAllUsersModel();
+      return res.status(200).json({ error: false, users });
     } catch (err) {
       console.error('Error occurred:', err);
       return res.status(500).json({ error: true, message: "Erro no servidor" });
