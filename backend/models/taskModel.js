@@ -4,12 +4,6 @@ const pool = require('../db/database');
 async function insertTask(userData) {
     try {
         console.log(userData);
-        
-        task.titleTask = titleTask;
-        task.descriptionTask = descriptionTask;
-        task.limited_date = limited_date;
-        task.hourTask = hourTask;
-        task.statusTask = statusTask;
 
         const sql = "INSERT INTO tb_tarefas (desc_tarefa, fg_ativo, data_tarefa, horario, titulo_tarefa) VALUES ($1, $2, $3, $4, $5) RETURNING *";
         const values = [userData.descriptionTask, userData.statusTask, userData.limited_date, userData.hourTask, userData.titleTask];

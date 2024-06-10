@@ -21,7 +21,7 @@ module.exports = class taskController {
         const result = await insertTask(task);
 
             console.log(result, "teste result");
-            return res.status(201).json({ error: false, message: "Usuário inserido com sucesso" });
+            return res.status(201).json({ error: false, message: "Tarefa criada com sucesso" });
         } catch (err) {
             console.error('Error occurred:', err);
             return res.status(500).json({ error: true, message: "Erro no servidor" });
