@@ -39,8 +39,21 @@ async function getAllUsersModel() {
   }
 }
 
+async function editUserModel(userData){
+  try {
+    const sql = "UPDATE tb_usuarios SET nm_usuario = $1, email = $2, senha = $3 WHERE id_user = $4;";
+    const values = [userData.nmUsuario, userData.email, userData.senha, userData.id_usuario];
+    const result = await pool.query(sql, values);
+    return result.rows;
+  } catch (err) {
+    console.error("Erro ao editar usuário:", err);
+    throw err;
+  }
+
+}
 module.exports = {
   insertUser,
   selectOneUserModel,
-  getAllUsersModel
+  getAllUsersModel,
+  editUserModel
 }
