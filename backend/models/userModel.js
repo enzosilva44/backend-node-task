@@ -28,7 +28,7 @@ async function selectOneUserModel(dataAccountUser){
   }
 }
 
-async function selectAllUsersModel() {
+async function getAllUsersModel() {
   try {
     const sql = "SELECT * FROM tb_usuarios";
     const result = await pool.query(sql);
@@ -42,5 +42,5 @@ async function selectAllUsersModel() {
 module.exports = {
   insertUser,
   selectOneUserModel,
-  selectAllUsersModel
+  getAllUsersModel
 }

@@ -26,7 +26,7 @@ module.exports = class userController {
 
   static async getAllUsers (req, res) {
     try {
-      const users = await selectAllUsersModel();
+      const users = await getAllUsersModel();
       return res.status(200).json({ error: false, users });
     } catch (err) {
       console.error('Error occurred:', err);
