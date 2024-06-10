@@ -83,11 +83,12 @@ module.exports = class Task {
         return this.#hourTask;
     }
 
-    set statusTask(statusTask) {
-        if (typeof statusTask !== "string" || !statusTask.trim()) {
-            throw new Error("statusTask deve ser uma string não vazia");
+    set idTask(statusTask) {
+        statusTask = Number(statusTask);
+        if (typeof statusTask !== "number" || isNaN(statusTask)) {
+            throw new Error("statusTask deve ser um número válido");
         }
-    this.#statusTask = statusTask;
+        this.#statusTask = statusTask;
     }
     get statusTask() {
         return this.#statusTask;
