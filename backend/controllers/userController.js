@@ -1,4 +1,4 @@
-const { insertUser } = require("../models/userModel");
+const { insertUser, getAllUsersModel } = require("../models/userModel");
 const User = require("../classes/userClass");
 
 module.exports = class userController {
