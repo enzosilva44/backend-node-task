@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { selectAllUsersModel } = require('../models/userModel'); // Certifique-se de que o caminho está correto
+const { getAllUsersModel } = require('../models/userModel'); // Certifique-se de que o caminho está correto
 
 exports.authenticateUser = async (req, res) => {
   const { email, senha } = req.body;
@@ -8,10 +8,10 @@ exports.authenticateUser = async (req, res) => {
   console.log(`Email: ${email}, Senha: ${senha}`);
 
   try {
-    const users = await selectAllUsersModel();
+    const users = await getAllUsersModel();
 
     // Exibe todos os usuários no console para depuração
-    console.log('Usuários: rgdsfgdfsdfhfdgjhgfhyjgfy', users);
+    console.log('Usuários:', users);
 
     // Verifique se o usuário existe e a senha está correta
     const user = users.find(user => user.email === email && user.senha === senha);
