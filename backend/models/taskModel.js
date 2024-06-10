@@ -29,8 +29,6 @@ async function getAllTasksModel() {
 
 module.exports = { 
     insertTask,
-    getAllTasksModel,
-    editUserModel,
-    deleteUserModel
+    getAllTasksModel
 
 }
