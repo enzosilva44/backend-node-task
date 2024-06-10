@@ -1,4 +1,4 @@
-const { insertUser, getAllUsersModel, editUserModel } = require("../models/userModel");
+const { insertUser, getAllUsersModel, editUserModel, deleteUserModel } = require("../models/userModel");
 const User = require("../classes/userClass");
 
 module.exports = class userController {
@@ -53,6 +53,21 @@ module.exports = class userController {
       console.log(result, "edit result");
 
       return res.status(200).json({ error: false, message: "Usuário editado com sucesso" });
+    } catch (err) {
+      console.error('Error occurred:', err);
+      return res.status(500).json({ error: true, message: "Erro no servidor" });
+    }
+  }
+
+  static async deleteUser(req, res) {
+    try {
+      const { id_usuario } = req.body;
+      if (!id_usuario) {
+        return res.status(401).json({ error: true, message: "Informe ID do usuário" });
+      }
+      const result = await deleteUserModel(id_usuario);
+      console.log(result, "delete result");
+      return res.status(200).json({ error: false, message: "Usuário deletado com sucesso" });
     } catch (err) {
       console.error('Error occurred:', err);
       return res.status(500).json({ error: true, message: "Erro no servidor" });

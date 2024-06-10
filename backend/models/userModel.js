@@ -49,11 +49,24 @@ async function editUserModel(userData){
     console.error("Erro ao editar usuário:", err);
     throw err;
   }
-
 }
+
+async function deleteUserModel(id_usuario){
+  try {
+    const sql = "DELETE FROM tb_usuarios WHERE id_usuario = $1;";
+    const values = [id_usuario];
+    const result = await pool.query(sql, values);
+    return result.rows;
+  } catch (err) {
+    console.error("Erro ao deletar usuário:", err);
+    throw err;
+  }
+}
+
 module.exports = {
   insertUser,
   selectOneUserModel,
   getAllUsersModel,
-  editUserModel
+  editUserModel,
+  deleteUserModel
 }

@@ -9,4 +9,6 @@ router.post('/register', userController.postUser);
 
 router.put('/edit-user', userController.editUser);
 
+router.del('/delete-user', userController.deleteUser);
+
 module.exports = router;
