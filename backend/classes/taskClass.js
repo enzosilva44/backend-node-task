@@ -83,7 +83,7 @@ module.exports = class Task {
         return this.#hourTask;
     }
 
-    set idTask(statusTask) {
+    set statusTask(statusTask) {
         statusTask = Number(statusTask);
         if (typeof statusTask !== "number" || isNaN(statusTask)) {
             throw new Error("statusTask deve ser um número válido");
