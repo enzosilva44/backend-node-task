@@ -1,4 +1,4 @@
-const { insertUser, getAllUsersModel, editUserModel, deleteUserModel } = require("../models/taskModel");
+const { insertTask, getAllUsersModel, editUserModel, deleteUserModel } = require("../models/taskModel");
 const Task = require("../classes/taskClass");
 
 module.exports = class taskController {
