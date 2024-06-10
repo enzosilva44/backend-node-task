@@ -1,5 +1,5 @@
 module.exports = class Task {
-    #idTask;
+    #id_tarefa;
     #titleTask;
     #descriptionTask;
     #limited_date;
@@ -7,7 +7,7 @@ module.exports = class Task {
     #statusTask;
     
     constructor() {
-        this.#idTask = null;
+        this.#id_tarefa = null;
         this.#titleTask = null;
         this.#descriptionTask = null;
         this.#limited_date = null;
@@ -15,15 +15,15 @@ module.exports = class Task {
         this.#statusTask = null;
     }
 
-    set idTask(idTask) {
-        idTask = Number(idTask);
-        if (typeof idTask !== "number" || isNaN(idTask)) {
-            throw new Error("idTask deve ser um número válido");
+    set id_tarefa(id_tarefa) {
+        id_tarefa = Number(id_tarefa);
+        if (typeof id_tarefa !== "number" || isNaN(id_tarefa)) {
+            throw new Error("id_tarefa deve ser um número válido");
         }
-        this.#idTask = idTask;
+        this.#id_tarefa = id_tarefa;
     }
-    get idTask() {
-        return this.#idTask;
+    get id_tarefa() {
+        return this.#id_tarefa;
     }
 
     set titleTask(titleTask) {
