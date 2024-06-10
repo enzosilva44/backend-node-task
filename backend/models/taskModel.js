@@ -16,7 +16,21 @@ async function insertTask(userData) {
     }
 }
 
+async function getAllTasksModel() {
+    try {
+        const sql = "SELECT * FROM tb_tarefas";
+        const result = await pool.query(sql);
+        return result.rows;
+    } catch (err) {
+        console.error("Erro ao buscar todas as tarefas:", err);
+        throw err;
+    }
+}
+
 module.exports = { 
     insertTask,
+    getAllTasksModel,
+    editUserModel,
+    deleteUserModel
 
 }

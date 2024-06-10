@@ -18,7 +18,7 @@ module.exports = class taskController {
             task.statusTask = 2;
         } else if (task.statusTask === "andamento") {
             task.statusTask = 1;
-        } else if (task.statusTask === "concluída") {
+        } else if (task.statusTask === "concluida") {
             task.statusTask = 3;
         } else {
             task.statusTask = 4;
@@ -33,6 +33,15 @@ module.exports = class taskController {
 
             console.log(result, "teste result");
             return res.status(201).json({ error: false, message: "Tarefa criada com sucesso" });
+        } catch (err) {
+            console.error('Error occurred:', err);
+            return res.status(500).json({ error: true, message: "Erro no servidor" });
+        }
+    }
+    static async getAlltasks (req, res) {
+        try {
+            const users = await getAllTasksModel();
+            return res.status(200).json({ error: false, users });
         } catch (err) {
             console.error('Error occurred:', err);
             return res.status(500).json({ error: true, message: "Erro no servidor" });

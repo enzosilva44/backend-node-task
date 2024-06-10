@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const taskController = require ('../controllers/taskController');
 
-//router.get('/', taskController.getAllUsers);
+router.get('/', taskController.getAlltasks);
 router.post('/register-task', taskController.postTask);
 
 
