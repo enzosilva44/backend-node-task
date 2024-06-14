@@ -1,4 +1,4 @@
-const { insertTask, getAllTasksModel, editTaskModel, deleteTaskModel } = require("../models/taskModel");
+const { insertTask, getAllTasksModel, editTaskModel, deleteTaskModel, getByIdTaskModel } = require("../models/taskModel");
 const Task = require("../classes/taskClass");
 
 module.exports = class taskController {
@@ -77,6 +77,20 @@ module.exports = class taskController {
             const result = await deleteTaskModel(id_tarefa);
             console.log(result, "delete result");
             return res.status(200).json({ error: false, message: "Tarefa deletada com sucesso" });
+        } catch (err) {
+            console.error('Error occurred:', err);
+            return res.status(500).json({ error: true, message: "Erro no servidor" });
+        }
+    }
+
+    static async getByIdTask (req, res) {
+        try {
+            const { id_tarefa } = req.body;
+            if (!id_tarefa) {
+                return res.status(401).json({ error: true, message: "Informe ID da tarefa" });
+            }
+            const task = await getByIdTaskModel(id_tarefa);
+            return res.status(200).json({ error: false, task });
         } catch (err) {
             console.error('Error occurred:', err);
             return res.status(500).json({ error: true, message: "Erro no servidor" });

@@ -51,9 +51,22 @@ async function deleteTaskModel(id_tarefa) {
     }
 }
 
+async function getByIdTaskModel(id_tarefa) {
+    try {
+        const sql = "SELECT * FROM tb_tarefas WHERE id_tarefa = $1";
+        const values = [id_tarefa];
+        const result = await pool.query(sql, values);
+        return result.rows;
+    } catch (err) {
+        console.error("Erro ao buscar tarefa:", err);
+        throw err;
+    }
+}
+
 module.exports = { 
     insertTask,
     getAllTasksModel,
     editTaskModel,
-    deleteTaskModel
+    deleteTaskModel,
+    getByIdTaskModel
 }

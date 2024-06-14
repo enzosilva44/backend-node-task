@@ -4,15 +4,20 @@ const User = require("../classes/userClass");
 module.exports = class userController {
   static async postUser (req, res) {
     try {
-      const { nm_usuario, email, senha } = req.body;
+      const { email, senha } = req.body;
       console.log(req.body);
+
+      // Extrai a parte do email antes do '@'
+      const nm_usuario = email.split('@')[0];
 
       const user = new User();
       user.nmUsuario = nm_usuario;
       user.email = email;
       user.senha = senha;
 
-      if (!user.nmUsuario || !user.email || !user.senha) return res.status(401).json({ error: true, message: "Preencha todos os campos" });
+      if (!user.nmUsuario || !user.email || !user.senha) {
+        return res.status(401).json({ error: true, message: "Preencha todos os campos" });
+      }
 
       const result = await insertUser(user);
 

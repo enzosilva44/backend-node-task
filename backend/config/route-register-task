@@ -1,0 +1,10 @@
+{
+"Exemplo de Rota para registrar uma tarefa, exemplificando, será necessário realizar alteração nos dadospara enviar no corpo da requisição.": "teste",
+
+
+  "titleTask": "Exemplo de Tarefa",
+  "descriptionTask": "Descrição da tarefa de exemplo",
+  "limited_date": "2024-06-10",
+  "hourTask": "14",
+  "statusTask": "3"
+}
