@@ -14,17 +14,6 @@ module.exports = class taskController {
         task.hourTask = hourTask;
         task.statusTask = statusTask;
 
-        if (task.statusTask  === "pendente") {  
-            task.statusTask = 2;
-        } else if (task.statusTask === "andamento") {
-            task.statusTask = 1;
-        } else if (task.statusTask === "concluida") {
-            task.statusTask = 3;
-        } else {
-            task.statusTask = 4;
-            console.log("Status da tarefa recebido na requisição é inválido");
-        }
-
         if (!titleTask || !descriptionTask || !limited_date || !hourTask || !statusTask) {
             return res.status(401).json({ error: true, message: "Preencha todos os campos" });
         }
