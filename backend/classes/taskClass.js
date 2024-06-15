@@ -73,12 +73,14 @@ module.exports = class Task {
     }
 
     set hourTask(hourTask) {
-        hourTask = Number(hourTask);
-        if (typeof hourTask !== "number" || isNaN(hourTask)) {
-            throw new Error("hourTask deve ser um número válido");
+        const timeRegex = /^([01]\d|2[0-3]):([0-5]\d)$/;
+        if (!timeRegex.test(hourTask)) {
+            throw new Error("hourTask deve estar no formato HH:MM");
         }
         this.#hourTask = hourTask;
     }
+
+    // Getter para hourTask
     get hourTask() {
         return this.#hourTask;
     }
