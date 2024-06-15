@@ -66,8 +66,8 @@ module.exports = class taskController {
             }
     
             const convertedTasks = tasks.map(task => {
-                task = this.convertStatusToString(task);
-                return this.formatTaskDate(task);
+                task = taskController.convertStatusToString(task);
+                return taskController.formatTaskDate(task);
             });
     
             console.log("Converted tasks:", convertedTasks);
@@ -78,6 +78,7 @@ module.exports = class taskController {
             return res.status(500).json({ error: true, message: "Erro no servidor" });
         }
     }
+    
     
     static async editTask(req, res) {
         try {
