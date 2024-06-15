@@ -33,23 +33,32 @@ module.exports = class taskController {
     }
 
     static formatTaskDate(task) {
-        task.limited_date = task.limited_date.toISOString().split('T')[0];
+        if (task.limited_date instanceof Date) {
+            task.limited_date = task.limited_date.toISOString().split('T')[0];
+        } else if (typeof task.limited_date === 'string') {
+            // Assuming task.limited_date is already in ISO format as a string
+            task.limited_date = task.limited_date.split('T')[0];
+        } else {
+            // Handle other cases as needed, such as null or undefined
+            task.limited_date = null; // or another default value
+        }
         return task;
     }
+    
 
     static convertStatusToString(task) {
-        switch (task.statusTask) {
+        switch (task.fg_ativo) {
             case 2:
-                task.statusTask = "pendente";
+                task.fg_ativo = "pendente";
                 break;
             case 1:
-                task.statusTask = "andamento";
+                task.fg_ativo = "andamento";
                 break;
             case 3:
-                task.statusTask = "concluida";
+                task.fg_ativo = "concluida";
                 break;
             default:
-                task.statusTask = "inválido";
+                task.fg_ativo = "inválido";
                 console.log("Status da tarefa recebido na requisição é inválido");
                 break;
         }
@@ -58,14 +67,14 @@ module.exports = class taskController {
 
     static async getAlltasks(req, res) {
         try {
-            const tasks = await getAllTasksModel();
-            console.log("Tasks fetched from model:", tasks);
+            const task = await getAllTasksModel();
+            console.log("Tasks fetched from model:", task);
     
-            if (!tasks || tasks.length === 0) {
+            if (!task || task.length === 0) {
                 return res.status(404).json({ error: true, message: "Nenhuma tarefa encontrada" });
             }
     
-            const convertedTasks = tasks.map(task => {
+            const convertedTasks = task.map(task => {
                 task = taskController.convertStatusToString(task);
                 return taskController.formatTaskDate(task);
             });
