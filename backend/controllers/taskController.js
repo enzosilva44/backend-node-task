@@ -33,18 +33,23 @@ module.exports = class taskController {
     }
 
     static formatTaskDate(task) {
+        if (task.horario) {
+            // Remover os segundos do horário (últimos três caracteres)
+            task.horario = task.horario.substring(0, task.horario.length - 3);
+        }
+        
+        // Formatando a data, caso necessário
         if (task.data_tarefa instanceof Date) {
             task.data_tarefa = task.data_tarefa.toISOString().split('T')[0];
         } else if (typeof task.data_tarefa === 'string') {
-            // Assuming task.data_tarefa is already in ISO format as a string
             task.data_tarefa = task.data_tarefa.split('T')[0];
         } else {
-            // Handle other cases as needed, such as null or undefined
-            task.data_tarefa = null; // or another default value
+            // Tratamento adicional se necessário
+            task.data_tarefa = null; // ou outro valor padrão
         }
+        
         return task;
-    }
-    
+    }        
 
     static convertStatusToString(task) {
         switch (task.fg_ativo) {
