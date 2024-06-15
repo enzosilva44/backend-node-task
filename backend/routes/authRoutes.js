@@ -6,8 +6,8 @@ const authController = require('../controllers/authController');
 router.post('/login', authController.authenticateUser);
 
 // Rota para login (GET)
-router.get('/login', (req, res) => {
-  res.send('Tela de login');
-});
+//router.get('/login', (req, res) => {
+//  res.send('Tela de login');
+//});
 
 module.exports = router;
