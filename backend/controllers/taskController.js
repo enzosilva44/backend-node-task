@@ -2,29 +2,57 @@ const { insertTask, getAllTasksModel, editTaskModel, deleteTaskModel, getByIdTas
 const Task = require("../classes/taskClass");
 
 module.exports = class taskController {
-    static async postTask (req, res) {
-    try {
-        const { titleTask, descriptionTask, limited_date, hourTask, statusTask } = req.body;
-        console.log(req.body);
-
-        const task = new Task();
-        task.titleTask = titleTask;
-        task.descriptionTask = descriptionTask;
-        task.limited_date = limited_date;
-        task.hourTask = hourTask;
-        task.statusTask = statusTask;
-
-        if (!titleTask || !descriptionTask || !limited_date || !hourTask || !statusTask) {
-            return res.status(401).json({ error: true, message: "Preencha todos os campos" });
-        }
-        const result = await insertTask(task);
-            console.log(result, "teste result");
+    static async postTask(req, res) {
+        try {
+            const { titleTask, descriptionTask, limited_date, hourTask, statusTask } = req.body;
+            console.log("Request body:", req.body);
+    
+            if (!titleTask || !descriptionTask || !limited_date || !hourTask || !statusTask) {
+                console.log("Validation failed: Missing fields");
+                return res.status(401).json({ error: true, message: "Preencha todos os campos" });
+            }
+    
+            // Validação adicional para statusTask
+            const validStatus = ["pendente", "andamento", "concluida"];
+            if (!validStatus.includes(statusTask)) {
+                console.log("Validation failed: Invalid statusTask");
+                return res.status(401).json({ error: true, message: "Status inválido" });
+            }
+    
+            const task = new Task();
+            task.titleTask = titleTask;
+            task.descriptionTask = descriptionTask;
+            task.limited_date = limited_date;
+            task.hourTask = hourTask;
+    
+            // Converte statusTask para número
+            switch (statusTask) {
+                case "pendente":
+                    task.statusTask = 2;
+                    break;
+                case "andamento":
+                    task.statusTask = 1;
+                    break;
+                case "concluida":
+                    task.statusTask = 3;
+                    break;
+                default:
+                    task.statusTask = 4; // Inválido
+                    break;
+            }
+    
+            console.log("Task object:", task);
+    
+            const result = await insertTask(task);
+            console.log("Insert result:", result);
+    
             return res.status(201).json({ error: false, message: "Tarefa criada com sucesso" });
         } catch (err) {
             console.error('Error occurred:', err);
             return res.status(500).json({ error: true, message: "Erro no servidor" });
         }
     }
+    
     static async getAlltasks (req, res) {
         try {
             const task = await getAllTasksModel();
