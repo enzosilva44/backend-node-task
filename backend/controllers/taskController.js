@@ -36,15 +36,11 @@ module.exports = class taskController {
             return res.status(500).json({ error: true, message: "Erro no servidor" });
         }
     }
-    static async getAlltasks(req, res) {
+    static async getAlltasks (req, res) {
         try {
-            const tasks = await getAllTasksModel();
-            console.log(tasks, "teste result");
-    
-            // Converte o status de todas as tarefas
-            const convertedTasks = tasks.map(convertStatusToString);
-    
-            return res.status(200).json({ error: false, tasks: convertedTasks });
+            const task = await getAllTasksModel();
+
+            return res.status(200).json({ error: false, task });
         } catch (err) {
             console.error('Error occurred:', err);
             return res.status(500).json({ error: true, message: "Erro no servidor" });
@@ -98,25 +94,5 @@ module.exports = class taskController {
             console.error('Error occurred:', err);
             return res.status(500).json({ error: true, message: "Erro no servidor" });
         }
-    }
-
-    static async convertStatusToString(task) {
-        let statusString;
-        switch (task.statusTask) {
-            case 2:
-                statusString = "pendente";
-                break;
-            case 1:
-                statusString = "andamento";
-                break;
-            case 3:
-                statusString = "concluida";
-                break;
-            default:
-                statusString = "inválido";
-                console.log("Status da tarefa recebido na requisição é inválido");
-                break;
-        }
-        return { ...task, statusTask: statusString };
     }
 }
