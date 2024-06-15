@@ -59,20 +59,26 @@ module.exports = class taskController {
     static async getAlltasks(req, res) {
         try {
             const tasks = await getAllTasksModel();
-            console.log(tasks, "teste result");
-
+            console.log("Tasks fetched from model:", tasks);
+    
+            if (!tasks || tasks.length === 0) {
+                return res.status(404).json({ error: true, message: "Nenhuma tarefa encontrada" });
+            }
+    
             const convertedTasks = tasks.map(task => {
                 task = this.convertStatusToString(task);
                 return this.formatTaskDate(task);
             });
-
+    
+            console.log("Converted tasks:", convertedTasks);
+    
             return res.status(200).json({ error: false, tasks: convertedTasks });
         } catch (err) {
-            console.error('Error occurred:', err);
+            console.error('Error occurred in getAlltasks:', err);
             return res.status(500).json({ error: true, message: "Erro no servidor" });
         }
     }
-
+    
     static async editTask(req, res) {
         try {
             const { id_tarefa, titleTask, descriptionTask, limited_date, hourTask, statusTask } = req.body;
