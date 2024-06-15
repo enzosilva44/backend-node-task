@@ -33,14 +33,14 @@ module.exports = class taskController {
     }
 
     static formatTaskDate(task) {
-        if (task.limited_date instanceof Date) {
-            task.limited_date = task.limited_date.toISOString().split('T')[0];
-        } else if (typeof task.limited_date === 'string') {
-            // Assuming task.limited_date is already in ISO format as a string
-            task.limited_date = task.limited_date.split('T')[0];
+        if (task.data_tarefa instanceof Date) {
+            task.data_tarefa = task.data_tarefa.toISOString().split('T')[0];
+        } else if (typeof task.data_tarefa === 'string') {
+            // Assuming task.data_tarefa is already in ISO format as a string
+            task.data_tarefa = task.data_tarefa.split('T')[0];
         } else {
             // Handle other cases as needed, such as null or undefined
-            task.limited_date = null; // or another default value
+            task.data_tarefa = null; // or another default value
         }
         return task;
     }
