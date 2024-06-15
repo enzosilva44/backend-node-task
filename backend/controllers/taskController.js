@@ -81,7 +81,7 @@ module.exports = class taskController {
     
             console.log("Converted tasks:", convertedTasks);
     
-            return res.status(200).json({ error: false, tasks: convertedTasks });
+            return res.status(200).json({ error: false, task: convertedTasks });
         } catch (err) {
             console.error('Error occurred in getAlltasks:', err);
             return res.status(500).json({ error: true, message: "Erro no servidor" });
