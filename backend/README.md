@@ -1,8 +1,4 @@
-# Task-Flow-Backend# Projeto Consumindo API pública Pokedex
-
-- Autor: Enzo Gabriel de Oliveira e Silva, Ian Augusto Alvarenga Tonim 
-- Código: 24299, 23924
-- Curso: Engenheria de Software
+# Task-Flow-Backend#
 
 ## Descrição 
 
