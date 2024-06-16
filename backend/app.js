@@ -1,4 +1,3 @@
-// app.js
 const express = require('express');
 const cors = require('cors');
 const db = require('./db/database');
@@ -9,10 +8,16 @@ require('dotenv').config();
 
 const app = express();
 
-// Configuração de CORS para permitir solicitações da origem localhost:3000
+const whitelist = [process.env.CORS_ORIGIN_LOCAL, process.env.CORS_ORIGIN_PRODUCTION];
+
 const corsOptions = {
-  //origin: 'http://localhost:3000',
-  origin:  'https://task-flow-frontend-ochre.vercel.app',
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
@@ -38,7 +43,7 @@ app.get('/test-db', async (req, res) => {
 
 // Importação e uso das rotas de usuário e autenticação
 app.use('/api/users', userRoutes); // Use as rotas de usuário definidas em userRoutes
-app.use('/api/task', taskRoutes); // Use as rotas de usuário definidas em userRoutes
+app.use('/api/task', taskRoutes); // Use as rotas de usuário definidas em taskRoutes
 app.use('/api/auth', authRoutes); // Use as rotas de autenticação definidas em authRoutes
 
 // Definição da rota principal
