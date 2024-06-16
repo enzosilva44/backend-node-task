@@ -11,7 +11,7 @@ const app = express();
 
 // Configuração de CORS para permitir solicitações da origem localhost:3000
 const corsOptions = {
-  origin: 'https://task-flow-frontend-ochre.vercel.app/',
+  origin: 'https://task-flow-frontend-ochre.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
